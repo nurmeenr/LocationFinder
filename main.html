@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>LocationFinder</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="navbar">
+            <img src="images/ip.png" alt="logo" class="logo">
+            <p2>LocationFinder</p2>
+            <nav>
+                <ul>
+                    <li><a href="main.html">HOME</a></li>
+                    <li><a href="">SUPPORT</a></li>
+                    <li><a href="index.html">LOGOUT</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="header">
+            <h1>Find Your Location</h1>
+            <p3>An easy way to find a location and more using just an IP. Simply enter the IP in the box below and click "Find Location" </p3>
+        </div>
+
+        <div class="ip_field">
+            <input class="srch" type="search" name="" placeholder="IP address" id="ip_address">
+            <a href="#"><button class="btn" onclick="search();">Find Location</button></a>
+        </div>
+
+        <div class="row">
+            <div class="map_field">
+                <div id="map"></div>
+                <div id="ip_information"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        var map;
+
+        function search() {
+            let ip_address = document.getElementById("ip_address");
+            let ip_information = document.getElementById("ip_information");
+
+            let request = new XMLHttpRequest();
+            request.open("GET", "https://api.ipfind.com/?ip=" + ip_address.value + "&auth=0d44d7ff-2af0-4320-8c37-24df806ce912");
+            request.send();
+            request.onload = function() {
+                var data = JSON.parse(request.response)
+                console.log(request.response);
+                ip_information.style.visibility = 'visible'
+                document.getElementById("ip_information").innerHTML = "<pre>" + JSON.stringify(data, undefined, 2) + "</pre>"
+                draw_map(data.latitude, data.longitude);
+            };
+        }
+
+        function draw_map(latitude, longitude) {
+            if (map == null) {
+                map = L.map('map');
+            }
+
+            L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            var target = L.latLng(latitude, longitude);
+
+            map.setView(target, 14);
+
+            L.marker(target).addTo(map);
+        }
+    </script>
+</body>
+
+</html>

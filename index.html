@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>LoginPage</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <div class="login-div">
+        <form action="" name="myForm" class="form" onsubmit="login(event);">
+            <img src="images/ip.png" alt="logo">
+            <h2>Login</h2>
+            <div class="input-group">
+                <input type="text" name="loginUser" id="loginUser" required>
+                <label for="loginUser">User Name</label>
+            </div>
+            <div class="input-group">
+                <input type="password" name="loginPassword" id="loginPassword" required>
+                <label for="loginPassword">Password</label>
+            </div>
+            <a href="#forgot-pw" class="forgot-pw">Forgot Password?</a>
+            <input type="submit" value="Login" class="submit-btn" />
+            <p>Don't have an account? <a href="#register" class="register">Register Here</a></p>
+        </form>
+
+        <div id="forgot-pw">
+            <a href="#" class="close">&times;</a>
+            <form action="" class="form">
+                <h2>Reset Password</h2>
+                <div class="input-group">
+                    <input type="email" name="email" id="email" required>
+                    <label for="email">Email</label>
+                </div>
+                <input type="submit" value="Submit" class="submit-btn">
+            </form>
+        </div>
+
+        <div id="register">
+            <a href="#" class="close">&times;</a>
+            <form action="" class="form">
+                <h2>Register Here</h2>
+                <div class="input-group">
+                    <input type="email" name="email" id="email" required>
+                    <label for="email">Email</label>
+                </div>
+                <div class="input-group">
+                    <input type="" name="username" id="username" required>
+                    <label for="username">User Name</label>
+                </div>
+                <div class="input-group">
+                    <input type="password" name="loginPassword" id="loginPassword" required>
+                    <label for="loginPassword">Password</label>
+                </div>
+                <input type="submit" value="Register" class="submit-btn">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function login(e) {
+            e.preventDefault();
+
+            $.getJSON("authorization.json", function(json) {
+                let username_field = document.getElementById("loginUser");
+                let password_field = document.getElementById("loginPassword");
+
+                for (var user in json) {
+                    if (username_field.value == user && password_field.value == json[user]) {
+                        window.location.href = "main.html";
+                        return;
+                    }
+                }
+                alert("Incorrect username or password.");
+            });
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
