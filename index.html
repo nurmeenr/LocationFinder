@@ -9,7 +9,7 @@
 
 <body>
     <div class="login-div">
-        <form action="" name="myForm" class="form" onsubmit="login(event);">
+        <form name="myForm" class="form" onsubmit="login(event);">
             <img src="images/ip.png" alt="logo">
             <h2>Login</h2>
             <div class="input-group">
@@ -27,7 +27,7 @@
 
         <div id="forgot-pw">
             <a href="#" class="close">&times;</a>
-            <form action="" class="form">
+            <form class="form">
                 <h2>Reset Password</h2>
                 <div class="input-group">
                     <input type="email" name="email" id="email" required>
@@ -39,19 +39,19 @@
 
         <div id="register">
             <a href="#" class="close">&times;</a>
-            <form action="" class="form">
+            <form class="form">
                 <h2>Register Here</h2>
                 <div class="input-group">
-                    <input type="email" name="email" id="email" required>
-                    <label for="email">Email</label>
+                    <input id="email2" required>
+                    <label for="email2">Email</label>
                 </div>
                 <div class="input-group">
-                    <input type="" name="username" id="username" required>
+                    <input name="username" id="username" required>
                     <label for="username">User Name</label>
                 </div>
                 <div class="input-group">
-                    <input type="password" name="loginPassword" id="loginPassword" required>
-                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword2" required>
+                    <label for="loginPassword2">Password</label>
                 </div>
                 <input type="submit" value="Register" class="submit-btn">
             </form>

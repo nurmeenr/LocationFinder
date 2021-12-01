@@ -84,7 +84,6 @@ body {
     top: 0;
     left: 0;
     padding: 10px 0;
-    font-size: 1 rem;
     pointer-events: none;
     transition: .3s ease-out;
 }
@@ -195,7 +194,7 @@ p {
     cursor: pointer;
 }
 
-p2 {
+span {
     vertical-align: center;
     color: #b8860b;
     margin-left: 10px;
@@ -274,7 +273,7 @@ h1 {
     font-family: monospace;
 }
 
-p3 {
+.header span {
     color: #fff;
     font-size: 20px;
 }
